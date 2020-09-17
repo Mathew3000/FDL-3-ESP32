@@ -1,5 +1,7 @@
 {
-    "board": "arduino:avr:uno",
-    "port": "COM12",
-    "sketch": "FDL-3_Firmware_v1.05.ino"
+    "board": "esp32:esp32:esp32doit-devkit-v1",
+    "port": "COM15",
+    "sketch": "FDL-3-ESP32.ino",
+    "configuration": "FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
+    "output": "./ArduinoOutput"
 }

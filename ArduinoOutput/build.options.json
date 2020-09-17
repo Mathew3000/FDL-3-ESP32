@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "\\ArduinoOutput\\preproc\\ctags_target_for_gcc_minus_e.cpp,\\ArduinoOutput\\sketch\\FDL-3-ESP32.ino.cpp",
+  "builtInLibrariesFolders": "C:\\Program Files (x86)\\Arduino\\libraries",
+  "customBuildProperties": "build.path=c:\\Users\\matthias.naumann\\Documents\\FDL-3-ESP32\\ArduinoOutput,build.warn_data_percentage=75,runtime.tools.xtensa-esp32-elf-gcc.path=C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\xtensa-esp32-elf-gcc\\1.22.0-80-g6c4433a-5.2.0,runtime.tools.xtensa-esp32-elf-gcc-1.22.0-80-g6c4433a-5.2.0.path=C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\xtensa-esp32-elf-gcc\\1.22.0-80-g6c4433a-5.2.0,runtime.tools.esptool_py.path=C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esptool_py\\2.6.1,runtime.tools.esptool_py-2.6.1.path=C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\esptool_py\\2.6.1,runtime.tools.mkspiffs.path=C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\mkspiffs\\0.2.3,runtime.tools.mkspiffs-0.2.3.path=C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\mkspiffs\\0.2.3",
+  "fqbn": "esp32:esp32:esp32doit-devkit-v1:FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
+  "hardwareFolders": "C:\\Program Files (x86)\\Arduino\\hardware,C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages",
+  "otherLibrariesFolders": "C:\\Users\\matthias.naumann\\Documents\\Arduino\\libraries",
+  "runtime.ide.version": "10808",
+  "sketchLocation": "c:\\Users\\matthias.naumann\\Documents\\FDL-3-ESP32\\FDL-3-ESP32.ino",
+  "toolsFolders": "C:\\Program Files (x86)\\Arduino\\tools-builder,C:\\Program Files (x86)\\Arduino\\hardware\\tools\\avr,C:\\Users\\matthias.naumann\\AppData\\Local\\Arduino15\\packages"
+}

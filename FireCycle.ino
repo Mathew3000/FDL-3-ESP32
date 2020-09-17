@@ -6,7 +6,7 @@ const int rearUpLoopDur = 80; //first wait for rear switch
 const int rearUpLoopDur2 = 200; //backup wait for rear switch
 const int pusherBlipDur = 8; //pusher blip in attempts to reach back switch
 
-void fireSequence(){
+bool fireSequence(){
 
     if(currBlSettings.fireMode == SAFETY){
       toneAlt(3000, 50);

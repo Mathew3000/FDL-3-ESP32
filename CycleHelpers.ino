@@ -2,6 +2,12 @@
 #define PSHREAR 2
 #define PSHNONE 0
 
+#define ANALOG_NONE 500
+#define ANALOG_BT_1 4100
+#define ANALOG_BT_2 3300
+#define ANALOG_BT_3 2700
+#define ANALOG_BT_ROT 2400
+
 #define PRSTNONE 0
 #define PRST1 1
 #define PRST2 2
@@ -137,28 +143,22 @@ boolean lockOn(){
 int presetButtonDown(){
   int readVal = analogRead(presetBtnPin);
 
-  // PARTY
-  // THIS IS ONLY FOR DEBUG BUILDUP!!!!
-  if(readVal > 600)
-    return PRSTNONE;
-  else
-  {
-    return PRSTROT;
-  }
-  // ENDPARTY
-  if(readVal < 400){
+  if(readVal < ANALOG_NONE){
     return PRSTNONE;
   }
-  if(readVal < 700){
+  if(readVal < ANALOG_BT_ROT){
     return PRSTROT;
   }
-  if(readVal < 800){
+  if(readVal < ANALOG_BT_3){
     return PRST3;
   }
-  if(readVal < 900){
+  if(readVal < ANALOG_BT_2){
     return PRST2;
   }
-  return PRST1;
+  if(readVal < ANALOG_BT_1)
+  {
+    return PRST1;
+  }
 }
 
 int pusherSwitchDown(){
@@ -191,7 +191,7 @@ int getSpinupByMotorSpeed(){
   double throttleFactor =  (targetThrottle - currentSpeed) / (targetThrottle - MINTHROTTLE);
   calcSpin = calcSpin * throttleFactor - minSync;
   
-  return max(0, calcSpin);
+  return max(0.0, calcSpin);
 }
 
 double doubleMap(double x, double in_min, double in_max, double out_min, double out_max) {

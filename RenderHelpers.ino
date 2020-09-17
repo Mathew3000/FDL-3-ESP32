@@ -1,14 +1,12 @@
 
 void renderVoltMeter(){  
   if(firstMenuRun){
-    //voltMeter->reDraw();
-    // PARTY
+    voltMeter->reDraw();
   }
 
   float voltLevel = getVoltLevel();
   voltLevel = 11.0;
-  //voltMeter->setValue(voltLevel * 10);
-  // PARTY
+  voltMeter->setValue(voltLevel * 10);
 
   if(speedLocked){
     renderLockIndicator();
@@ -208,8 +206,8 @@ void renderUserLock(){
 //main menu
 /////////////////
 void renderKnobScrollMenu(){
-  encoderChange += myEnc.read();
-  myEnc.write(0);
+  encoderChange += myEnc.getCount();
+  myEnc.setCount(0);
 
   byte arraySize = sizeof(knobMenu) / sizeof(size_t);
   if(abs(encoderChange) >= 8){
@@ -253,8 +251,8 @@ void renderKnobScrollMenu(){
 //menu type settings
 /////////////////
 void renderMenu(byte &menuIndex, const char label[], const char* menu[], byte arraySize){
-  encoderChange += myEnc.read();
-  myEnc.write(0);
+  encoderChange += myEnc.getCount();
+  myEnc.setCount(0);
 
   if(abs(encoderChange) >= 4){
     if(!(menuIndex == 0 && encoderChange < 0)){
@@ -299,35 +297,35 @@ void renderMenu(byte &menuIndex, const char label[], const char* menu[], byte ar
 //gauge type settings
 /////////////////
 void renderGauge(int &gaugeValue, String label, int gaugeMin, int gaugeMax, int valueMin, int valueMax, int detPerMove){
-  //mainGauge->setMinValue(gaugeMin);
-  //mainGauge->setMaxValue(gaugeMax);
-  //PARTY 
+  mainGauge->setMinValue(gaugeMin);
+  mainGauge->setMaxValue(gaugeMax);
   
   if(firstMenuRun){
-//PARTY     mainGauge->reDraw();
+    mainGauge->reDraw();
     firstMenuRun = false;
   }
 
   oled.setCursor(0,0);
   oled.setTextSize(LARGE_T);
   oled.print(label);
+  oled.setTextSize(SMALL_T);
     
-  encoderChange += myEnc.read();
-  myEnc.write(0);
+  encoderChange += myEnc.getCount();
+  myEnc.setCount(0);
 
   if(abs(encoderChange) >= detPerMove || firstMenuRun){
     gaugeValue += encoderChange / detPerMove;
     gaugeValue = constrain(gaugeValue, valueMin, valueMax);
     encoderChange = 0;
   }
-
-  oled.setCursor(OLED_WIDTH / 2 - 1.5 * CH_LW, OLED_HEIGHT - CH_LH);
+  // Deactivated Extra Delay
+  /*oled.setCursor(OLED_WIDTH / 2 - 1.5 * CH_LW, OLED_HEIGHT - CH_LH);
   oled.fillRect(0, OLED_HEIGHT - CH_LH, OLED_WIDTH, CH_LH, BLACK);    
   oled.print(gaugeValue);
   if(gaugeValue < 10){ oled.print(" "); }
-  if(gaugeValue < 100){ oled.print(" "); }
+  if(gaugeValue < 100){ oled.print(" "); }*/
 
-//PARTY   mainGauge->setValue(gaugeValue);
+  mainGauge->setValue(gaugeValue);
   oled.display();
 }
 
@@ -411,12 +409,9 @@ void renderSplash(String splashText){
 }
 
 void renderPresetMenu(){
-  //PARTY
-  return;
-
   
-  encoderChange += myEnc.read();
-  myEnc.write(0);
+  encoderChange += myEnc.getCount();
+  myEnc.setCount(0);
 
   byte arraySize = sizeof(presetMenu) / sizeof(size_t);
   if(abs(encoderChange) >= 4){
@@ -450,7 +445,7 @@ void renderPresetMenu(){
     int txtHeight = CH_LH;
     int txtLocX = constrain((OLED_WIDTH - txtWidth) / 2 - 1, 0, OLED_WIDTH / 2);
   
-    //PARTY oled.rectFill(0, 26, 55, 26 + txtHeight, BLACK, NORM);
+    oled.fillRect(0, 26, txtWidth, txtHeight, BLACK);
     
     oled.setCursor(txtLocX, OLED_HEADER);    
     testPtr = presetMenu[presetMenuIndex];
@@ -495,8 +490,9 @@ void renderPreset(byte preset){
   oled.print("I:");
   oled.print(readBlSettings.idleTime);
 
-  //PARTY oled.rectFill(57, 39, 8, 9, WHITE , NORM);
-//PARTY   oled.setColor(BLACK);
+
+  oled.fillRect(57, 39, 8, 9, WHITE);
+  oled.setColor(BLACK);
   oled.setCursor(0,0);
   oled.setTextSize(LARGE_T);
   oled.print("Preset: ");
