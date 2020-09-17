@@ -1,0 +1,14 @@
+{
+  "name": "MicroViewWidget",
+  "keywords": "micro, view",
+  "description": "MicroViewWidget extracted from MicroView",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/"
+  },
+  "version": "0.0.1",
+  "exclude": "doc",
+  "frameworks": "arduino",
+  "platforms": ["atmelavr", "ststm32", "teensy", "espressif8266","samd", "espressif32"]
+}
