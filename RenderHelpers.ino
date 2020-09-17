@@ -5,6 +5,7 @@ void renderVoltMeter(){
   }
 
   float voltLevel = getVoltLevel();
+  //PARTY
   voltLevel = 11.0;
   voltMeter->setValue(voltLevel * 10);
 
@@ -12,7 +13,7 @@ void renderVoltMeter(){
     renderLockIndicator();
   }
   else{
-    oled.setCursor(41,0);
+    oled.setCursor(OLED_WIDTH - (5 * CH_SW) - 1, OLED_HEADER - CH_SH);
     if(voltLevel < 10){
       oled.print("0");
     }
@@ -51,7 +52,7 @@ void renderVoltMeter(){
     }
   }
   
-  oled.setCursor(56,39);
+  oled.setCursor(OLED_WIDTH - CH_SW - 1,OLED_HEIGHT - CH_SH);
   oled.print("B");    
 }
 
@@ -492,7 +493,7 @@ void renderPreset(byte preset){
 
 
   oled.fillRect(57, 39, 8, 9, WHITE);
-  oled.setColor(BLACK);
+  oled.setTextColor(BLACK);
   oled.setCursor(0,0);
   oled.setTextSize(LARGE_T);
   oled.print("Preset: ");

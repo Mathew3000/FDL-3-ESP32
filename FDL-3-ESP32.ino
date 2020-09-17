@@ -12,7 +12,25 @@
 #include <MicroViewWidget.h>
 
 
-
+#define MENU_SPEED  "Speed"
+#define MENU_ROF    "ROF"
+#define MENU_BURST  "Burst"
+#define MENU_MINSPIN  "MinSpin"
+#define MENU_MAXSPIN  "MaxSpin"
+#define MENU_FIREMODE "FireMode"
+#define MENU_SPINDOWN "Spindown"
+#define MENU_IDLE   "Idle"
+#define MENU_LOAD   "Load"
+#define MENU_SAVE   "Save"
+#define MENU_MINSPD "MinSpd"
+#define MENU_MAXSPD "MaxSpd"
+#define MENU_BTNMODE  "BtnMode"
+#define MENU_BRKAG  "BrkAg"
+#define MENU_USERLOCK "UserLock"
+#define MENU_BRIGHT "Bright"
+#define MENU_SOUND  "Sound"
+#define MENU_BATOFFSET  "BatOff"
+#define MENU_INFO "Info"
 
 
 const byte versionNumber = 101;
@@ -61,25 +79,24 @@ Adafruit_SSD1306 oled(OLED_WIDTH,OLED_HEIGHT, OLED_MOSI, OLED_SCK, OLED_DC, OLED
 //MENUS
 const char *knobMenu[] = 
 {
-  "Speed",
-  "ROF",
-  "Burst", 
-  "MinSpin",
-  "MaxSpin",   
-  "FireMode",
-  "Spindown",
-  "Idle",
-  "Load",
-  "Save",
-  "MinSpd",
-  "MaxSpd",
-  "BtnMode",
-  "BrkAg",
-  "ULock",
-  "Bright",
-  "Sound",
-  "BatOff",
-  "Info"    
+  MENU_SPEED,
+  MENU_ROF,
+  MENU_BURST,
+  MENU_MINSPIN,
+  MENU_MAXSPIN,
+  MENU_FIREMODE,
+  MENU_SPINDOWN,
+  MENU_IDLE,
+  MENU_LOAD,
+  MENU_SAVE,
+  MENU_MINSPD,
+  MENU_MAXSPD,
+  MENU_BTNMODE, 
+  MENU_BRKAG,
+  MENU_USERLOCK,
+  MENU_SOUND,
+  MENU_BATOFFSET,
+  MENU_INFO
 };
 byte knobMenuIndex = 0;
 
@@ -185,8 +202,8 @@ void setup() {
   }
 
   //PARTY
-  mainGauge = new MicroViewGauge(SSD1306_LCDWIDTH/2, OLED_HEADER + 24, 0, 100, WIDGETSTYLE1);
-  voltMeter = new MicroViewSlider(56, 14, 106, 126, WIDGETSTYLE3);
+  mainGauge = new MicroViewGauge(OLED_WIDTH/2, OLED_HEADER + 24, 0, 100, WIDGETSTYLE1);
+  voltMeter = new MicroViewSlider(OLED_WIDTH - 15, OLED_HEADER, 106, 126, WIDGETSTYLE3 + WIDGETNOVALUE);
   mainGauge->reDraw();
   voltMeter->reDraw();
 
@@ -212,7 +229,7 @@ void setup() {
 }
 
 void loop() {
-  
+
   if(currStSettings.usrLock != 0){
     renderUserLock();
     return;

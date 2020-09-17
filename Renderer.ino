@@ -3,76 +3,88 @@
 /////////////
 void renderScreen(){
 
-  // PARTY
-  //renderVoltMeter();
+  renderVoltMeter();
 
   if(liveKnobScrollMode){
     renderKnobScrollMenu();
   }
   
   else{
-    switch(knobMenuIndex){
-      case 0:
-        renderGauge(currBlSettings.speedValue, "Speed", 0, 100, currStSettings.minSpeed, currStSettings.maxSpeed, 1);
-        break;
-      case 1:
-        renderGauge(currBlSettings.rofValue, "ROF", 0, 100, 0, 100, 1);
-        break;
-      case 2:
-        renderMenu(currBlSettings.burstCount, "Burst", burstMenu, sizeof(burstMenu) / sizeof(size_t));
-        break;
-      case 3:
-        renderGauge(currBlSettings.minSpinup, "MinSpn", 150, 500, 150, 500, 1);
-        break;
-      case 4:
-        renderGauge(currBlSettings.maxSpinup, "MaxSpn", 150, 500, 150, 500, 1);
-        break;
-      case 5:
-        renderMenu(currBlSettings.fireMode, "FireMode", firemodeMenu, sizeof(firemodeMenu) / sizeof(size_t));
-        break;  
-      case 6:
-        renderGauge(currBlSettings.spinDown, "SpnDwn", 6, 25, 6, 25, 8);
-        break;
-      case 7:
-        renderGauge(currBlSettings.idleTime, "Idle", 0, 10, 0, 10, 8);
-        break;    
-      case 8:
-        renderPresetMenu();
-        break;
-      case 9:
-        renderMenu(presetMenuIndex, "Save", presetMenu, sizeof(presetMenu) / sizeof(size_t));
-        break;
-      case 10:
-        renderGauge(currStSettings.minSpeed, "MinSpd", 0, 100, 0, currStSettings.maxSpeed, 1);
-        break;
-      case 11:
-        if(!speedLocked){
-          renderGauge(currStSettings.maxSpeed, "MaxSpd", 0, 100, currStSettings.minSpeed, 100, 1);
+    String menuName = knobMenu[knobMenuIndex];
+
+    if(menuName == MENU_SPEED)
+    {
+      renderGauge(currBlSettings.speedValue, MENU_SPEED, 0, 100, currStSettings.minSpeed, currStSettings.maxSpeed, 1);
+    } 
+    else if(menuName = MENU_ROF)
+    {
+      renderGauge(currBlSettings.rofValue, MENU_ROF, 0, 100, 0, 100, 1);
+    }
+    else if(menuName = MENU_BURST)
+    {
+      renderMenu(currBlSettings.burstCount, MENU_BURST, burstMenu, sizeof(burstMenu) / sizeof(size_t));
+    }
+    else if(menuName = MENU_MINSPIN)
+    {
+      renderGauge(currBlSettings.minSpinup, MENU_MINSPIN, 150, 500, 150, 500, 1);
+    }
+    else if(menuName = MENU_MAXSPIN)
+    {
+      renderGauge(currBlSettings.maxSpinup, MENU_MAXSPIN, 150, 500, 150, 500, 1);
+    }
+    else if(menuName = MENU_FIREMODE)
+    {
+      renderMenu(currBlSettings.fireMode, MENU_FIREMODE, firemodeMenu, sizeof(firemodeMenu) / sizeof(size_t));
+    }
+    else if(menuName = MENU_SPINDOWN)
+    {
+      renderGauge(currBlSettings.spinDown, MENU_SPINDOWN, 6, 25, 6, 25, 8);
+    }
+    else if(menuName = MENU_IDLE)
+    {
+      renderGauge(currBlSettings.idleTime, MENU_IDLE, 0, 10, 0, 10, 8);
+    }
+    else if(menuName = MENU_LOAD)
+    {
+      renderPresetMenu();
+    }
+    else if(menuName = MENU_SAVE)
+    {
+      renderMenu(presetMenuIndex, MENU_SAVE, presetMenu, sizeof(presetMenu) / sizeof(size_t));
+    }
+    else if(menuName = MENU_MINSPD)
+    {
+      renderGauge(currStSettings.minSpeed, MENU_MINSPD, 0, 100, 0, currStSettings.maxSpeed, 1);
+    }
+    else if(menuName = MENU_MAXSPD)
+    {
+      if(!speedLocked){
+          renderGauge(currStSettings.maxSpeed, MENU_MAXSPD, 0, 100, currStSettings.minSpeed, 100, 1);
         }
-        break; 
-      case 12:
-        renderMenu(currStSettings.btnMode, "Btn Mode", btnmodeMenu, sizeof(btnmodeMenu) / sizeof(size_t));
-        break;
-      case 13:
-        renderGauge(currStSettings.brkAgr, "BrkAgr", 3, 25, 3, 25, 8);
-        break;
-      case 14:
-        renderUserLock();
-        break;
-      case 15:
-        renderGauge(currStSettings.brightness, "Bright", 0, 100, 0, 100, 1);
-        break;
-      case 16:
-        renderMenu(currStSettings.soundOn, "Sound", soundMenu, sizeof(soundMenu) / sizeof(size_t));
-        break;
-      case 17:
-        renderGauge(currStSettings.batOffset, "BatOff", -8, 8, -8, 8, 8);
-        break;
-      case 18:
-        renderInfoMenu();
-        break;      
-      default:
-        break;
+    }
+    else if(menuName = MENU_BTNMODE)
+    {
+      renderMenu(currStSettings.btnMode, MENU_BTNMODE, btnmodeMenu, sizeof(btnmodeMenu) / sizeof(size_t));
+    }
+    else if(menuName = MENU_BRKAG)
+    {
+      renderGauge(currStSettings.brkAgr, MENU_BRKAG, 3, 25, 3, 25, 8);
+    }
+    else if(menuName = MENU_USERLOCK)
+    {
+      renderUserLock();
+    }
+    else if(menuName = MENU_SOUND)
+    {
+      renderMenu(currStSettings.soundOn, MENU_SOUND, soundMenu, sizeof(soundMenu) / sizeof(size_t));
+    }
+    else if(menuName == MENU_BATOFFSET)
+    {
+      renderGauge(currStSettings.batOffset, MENU_BATOFFSET, -8, 8, -8, 8, 8);
+    }
+    else if(menuName = MENU_INFO)
+    {
+      renderInfoMenu();
     }
   }  
   
