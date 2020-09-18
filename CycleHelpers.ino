@@ -59,6 +59,7 @@ bool checkCount(){
   if(millis() - logicSwitchCheck > 1 && pusherSwitchDown() == PSHFRNT){
     logicSwitchCheck = millis();
     hitCount++;
+    if(currentMagCount > 0) currentMagCount--;
   }
 
   if(hitCount > 3){    

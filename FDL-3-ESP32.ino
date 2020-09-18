@@ -12,25 +12,26 @@
 #include <MicroViewWidget.h>
 
 
-#define MENU_SPEED  "Speed"
-#define MENU_ROF    "ROF"
-#define MENU_BURST  "Burst"
-#define MENU_MINSPIN  "MinSpin"
-#define MENU_MAXSPIN  "MaxSpin"
-#define MENU_FIREMODE "FireMode"
-#define MENU_SPINDOWN "Spindown"
-#define MENU_IDLE   "Idle"
-#define MENU_LOAD   "Load"
-#define MENU_SAVE   "Save"
-#define MENU_MINSPD "MinSpd"
-#define MENU_MAXSPD "MaxSpd"
-#define MENU_BTNMODE  "BtnMode"
-#define MENU_BRKAG  "BrkAg"
-#define MENU_USERLOCK "UserLock"
-#define MENU_BRIGHT "Bright"
-#define MENU_SOUND  "Sound"
+#define MENU_SPEED      "Speed"
+#define MENU_ROF        "ROF"
+#define MENU_BURST      "Burst"
+#define MENU_MINSPIN    "MinSpin"
+#define MENU_MAXSPIN    "MaxSpin"
+#define MENU_FIREMODE   "FireMode"
+#define MENU_SPINDOWN   "Spindown"
+#define MENU_IDLE       "Idle"
+#define MENU_LOAD       "Load"
+#define MENU_SAVE       "Save"
+#define MENU_MINSPD     "MinSpd"
+#define MENU_MAXSPD     "MaxSpd"
+#define MENU_BTNMODE    "BtnMode"
+#define MENU_BRKAG      "BrkAg"
+#define MENU_USERLOCK   "UserLock"
+#define MENU_BRIGHT     "Bright"
+#define MENU_SOUND      "Sound"
 #define MENU_BATOFFSET  "BatOff"
-#define MENU_INFO "Info"
+#define MENU_INFO       "Info"
+#define MENU_MAGSIZE    "MagSize"
 
 
 const byte versionNumber = 101;
@@ -40,6 +41,7 @@ Servo flywheelESC;
 ESP32Encoder myEnc; 
 MicroViewWidget *mainGauge;
 MicroViewWidget *voltMeter;
+MicroViewWidget *magRemaining;
 //PARTY
 
 // OLED DEF
@@ -85,6 +87,7 @@ const char *knobMenu[] =
   MENU_MINSPIN,
   MENU_MAXSPIN,
   MENU_FIREMODE,
+  MENU_MAGSIZE,
   MENU_SPINDOWN,
   MENU_IDLE,
   MENU_LOAD,
@@ -103,7 +106,7 @@ byte knobMenuIndex = 0;
 const char *burstMenu[] = {"1","2","3","F"};
 const char *soundMenu[] = {"OFF","ON"};
 const char *presetMenu[] = {"Back","1","2","3"};
-const char *btnmodeMenu[] = {"PRESET","SPEED","ROF","BURST"};
+const char *btnmodeMenu[] = {"PRESET","SPEED","ROF","BURST","RELOAD"};
 const char *firemodeMenu[] = {"SAFE","TRIG","AUTO","CACHE"};
 byte presetMenuIndex = 0;
 
@@ -119,6 +122,7 @@ unsigned long lastBatAlarm = 0;
 unsigned long brakeRelease = 0;
 unsigned long idleRelease = 0;
 long encoderChange = 0;
+int currentMagCount = 0;
 int currentSpeed = NOTHROTTLE;
 int spindownTarget = NOTHROTTLE;
 
@@ -137,6 +141,7 @@ struct StaticSettings {
   int usrLock;
   int minSpeed;
   int maxSpeed;
+  int magSize;
 };
 StaticSettings currStSettings = { 3, 100, true, 0, 16, 0, 0, 100 };
 StaticSettings lastStSettings = { 3, 100, true, 0, 16, 0, 0, 100 };
@@ -204,8 +209,10 @@ void setup() {
   //PARTY
   mainGauge = new MicroViewGauge(OLED_WIDTH/2, OLED_HEADER + 24, 0, 100, WIDGETSTYLE1);
   voltMeter = new MicroViewSlider(OLED_WIDTH - 15, OLED_HEADER, 106, 126, WIDGETSTYLE3 + WIDGETNOVALUE);
+  magRemaining = new MicroViewSlider(0,OLED_HEADER, 0, currStSettings.magSize, WIDGETSTYLE3);
   mainGauge->reDraw();
   voltMeter->reDraw();
+  magRemaining->reDraw();
 
   initBatteryCheck(); 
 

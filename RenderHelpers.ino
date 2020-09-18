@@ -56,6 +56,19 @@ void renderVoltMeter(){
   oled.print("B");    
 }
 
+void renderMagRemainig()
+{
+  static int lastMagsize = currStSettings.magSize;
+
+  if(lastMagsize != currStSettings.magSize)
+  {
+    magRemaining->setMaxValue(currStSettings.magSize);
+    lastMagsize = currStSettings.magSize;
+  }
+  magRemaining->setValue(currentMagCount);
+  magRemaining->reDraw();
+}
+
 void batteryWarning(){
   toneAlt(2400, 140);
   toneAlt(4000, 140);
